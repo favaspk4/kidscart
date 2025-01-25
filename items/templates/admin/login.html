@@ -1,0 +1,26 @@
+{% extends "admin/base_site.html" %}
+
+{% block title %}Log in | {{ site_title }}{% endblock %}
+
+{% block content %}
+<div id="content" class="colM">
+    <h1>Log in</h1>
+
+    {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+
+    <form method="post" action="{% url 'admin:login' %}">{% csrf_token %}
+        <div class="form-row">
+            {{ form.username.label_tag }} {{ form.username }}
+        </div>
+        <div class="form-row">
+            {{ form.password.label_tag }} {{ form.password }}
+            <p class="help">Forgotten your password? <a href="{% url 'admin:password_reset' %}">Request a new one</a>.</p>
+        </div>
+        <div class="submit-row">
+            <input type="submit" value="Log in">
+        </div>
+    </form>
+</div>
+{% endblock %}
